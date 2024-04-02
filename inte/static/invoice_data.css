@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f0f0f0; /* Light gray background color for even rows */
+}
+
+/* Additional styling for odd rows */
+tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* White background color for odd rows */
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.print-button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Transition on background color change */
+}
+
+.print-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Keyframe animation for button click */
+@keyframes buttonClick {
+    0% {
+        transform: scale(1); /* Initial scale */
+    }
+    50% {
+        transform: scale(1.1); /* Scale up by 10% */
+    }
+    100% {
+        transform: scale(1); /* Return to original scale */
+    }
+}
+
+.print-button:active {
+    animation: buttonClick 0.3s ease; /* Apply animation on button click */
+}
+
+
+@media print {
+     @page {
+        size: A4; /* Adjust as needed */
+        margin: 0;
+    }
+    body * {
+        visibility: hidden;
+    }
+    .container, .container * {
+        visibility: visible;
+    }
+    .container {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Data</title>
+    <link rel="stylesheet" href="static/invoice_data.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Extracted Invoice Data</h1>
+
+        <!-- Iterate over each item in extracted_data -->
+        {% for item in extracted_data %}
+            <!-- Display non-item fields -->
+            {% for key, value in item.items %}
+                {% if key != 'Items' %}
+                    <p>{{ key }}: {{ value }}</p>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Display item fields -->
+            {% if item.Items %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ProductCode</th>
+                            <th>Barcode</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>UnitPrice</th>
+                            <th>Unit</th>
+                            <th>Tax</th>
+                            <th>TaxRate</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterate over each item in Items -->
+                        {% for item_data in item.Items %}
+                            <tr>
+                                <!-- Display values for each item field -->
+                                <td>{{ item_data.ProductCode }}</td>
+                                <td>{{ item_data.Barcode }}</td>
+                                <td>{{ item_data.Description }}</td>
+                                <td>{{ item_data.Quantity }}</td>
+                                <td>{{ item_data.UnitPrice }}</td>
+                                <td>{{ item_data.Unit }}</td>
+                                <td>{{ item_data.Tax }}</td>
+                                <td>{{ item_data.TaxRate }}</td>
+                                <td>{{ item_data.Amount }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Print Button -->
+    <div class="print">
+        <button class="print-button" onclick="printInvoice()">Print Invoice</button>
+    </div>
+
+    
+
+    <script>
+        function printInvoice() {
+            window.print();
+        }
+
+        // Redirect to extracted data page after printing
+        window.addEventListener("afterprint", function(event) {
+            window.history.back(); // Go back to the previous page
+        });
+        
+    </script>
+</body>
+</html>
