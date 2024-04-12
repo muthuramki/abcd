@@ -1,3 +1,7 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+
 name: Build and deploy Python app to Azure Web App - rayagiriocr
 
 on:
@@ -16,7 +20,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.9'  # Update to the correct Python version
+          python-version: '3.12'
 
       - name: Create and start virtual environment
         run: |
@@ -43,10 +47,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'  # Update to match your Azure environment name
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # This is required for requesting the JWT
+      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -57,12 +61,13 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EB3CE04890B54A29AA98E3E90C045056 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7B6A3B4E26C44A6A9A15EFE1515D72A0 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2045527A7AD04D12AFEACDD685921E20 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C4FC96156AAA44C0BB62A8D65F011BA9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D0BC2249F6B04443AD21E1EC84AF2E0F }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6F52FB4DADE845549CF68DD0C8363027 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -70,3 +75,4 @@ jobs:
         with:
           app-name: 'rayagiriocr'
           slot-name: 'Production'
+          
