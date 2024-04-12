@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0c68e682-158b-46ab-b42d-cfb622485252/resourceGroups/ramki/providers/Microsoft.Web/sites/rayagiriocr",
+    "appService.deploySubpath": "."
+}
