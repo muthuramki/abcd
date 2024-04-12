@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from ocr.views import upload_invoice
+from inte.views import upload_invoice
 
 urlpatterns = [
     path('', upload_invoice, name='upload_invoice'),
