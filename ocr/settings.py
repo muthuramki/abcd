@@ -101,7 +101,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Define the root directory where Django will collect static files during deployment.
-STATIC_ROOT = str(BASE_DIR / 'staticfiles')
+STATIC_ROOT = str(BASE_DIR / 'inte/static')
 
 # Additional locations of static files
 STATICFILES_DIRS = [
