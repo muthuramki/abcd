@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-oj-8uv8g=23^+orpuv-kb!zcg4&j=z^fo*!b358vhxo&e^52p9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['rayagiriocr.azurewebsites.net', '127.0.0.1']
 
