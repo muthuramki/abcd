@@ -6,12 +6,21 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    max-width: 1000px; /* Set the same max-width as the .container */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
@@ -48,7 +57,7 @@ p {
     margin-bottom: 10px;
 }
 
-.print-button {
+.edit-button, .print-button, .save-button, .sap-button {
     padding: 10px 20px;
     background-color: #4CAF50; /* Green */
     border: none;
@@ -57,13 +66,12 @@ p {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease; /* Transition on background color change */
 }
 
-.print-button:hover {
+.edit-button:hover, .print-button:hover, .save-button:hover, .sap-button:hover {
     background-color: #45a049; /* Darker green on hover */
 }
 
@@ -80,13 +88,12 @@ p {
     }
 }
 
-.print-button:active {
+.edit-button:active, .print-button:active, .save-button:active, .sap-button:active {
     animation: buttonClick 0.3s ease; /* Apply animation on button click */
 }
 
-
 @media print {
-     @page {
+    @page {
         size: A4; /* Adjust as needed */
         margin: 0;
     }
