@@ -9,17 +9,12 @@
 <body>
     <div class="container">
         <h1>Extracted Invoice Data</h1>
- 
-        <!-- Iterate over each item in extracted_data -->
         {% for item in extracted_data %}
-            <!-- Display non-item fields -->
             {% for key, value in item.items %}
                 {% if key != 'Items' %}
                     <p>{{ key }}: <span id="{{ key }}">{{ value }}</span> <input type="text" id="edit_{{ key }}" style="display: none;"></p>
                 {% endif %}
             {% endfor %}
- 
-            <!-- Display item fields -->
             {% if item.Items %}
                 <table id="editableTable">
                     <thead>
@@ -36,10 +31,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Iterate over each item in Items -->
                         {% for item_data in item.Items %}
                             <tr>
-                                <!-- Display values for each item field -->
                                 <td>{{ item_data.ProductCode }}</td>
                                 <td>{{ item_data.Barcode }}</td>
                                 <td>{{ item_data.Description }}</td>
@@ -56,96 +49,41 @@
             {% endif %}
         {% endfor %}
     </div>
- 
-    <!-- Buttons -->
     <div class="button-container">
-        <!-- Edit Button -->
         <button class="edit-button" onclick="toggleEdit()">Edit Data</button>
-               
-        <!-- Save Button -->
         <button class="save-button" onclick="saveData()" style="display: none;">Save</button>
-
-        <!-- Print Button -->
         <button class="print-button" onclick="printInvoice()">Print Invoice</button>
-
-        <!-- push Button -->
         <button class="sap-button" onclick="pushToSAP()">Push JSON to SAP</button>
     </div>
- 
     <script>
         function printInvoice() {
             window.print();
-        };
- 
-        // Function to toggle between display and edit mode
+        }
         function toggleEdit() {
-            var spans = document.querySelectorAll('span');
             var inputs = document.querySelectorAll('input[type="text"]');
+            var spans = document.querySelectorAll('span');
             var cells = document.querySelectorAll('#editableTable td');
- 
-            for (var i = 0; i < spans.length; i++) {
-                spans[i].style.display = 'none';
-                inputs[i].style.display = 'inline';
-                inputs[i].value = spans[i].innerText;
-            }
- 
-            for (var i = 0; i < cells.length; i++) {
-                cells[i].setAttribute('contenteditable', true);
-            }
-
-            // Show the Save button
+            inputs.forEach((input, index) => {
+                input.style.display = 'inline';
+                input.value = spans[index].innerText;
+            });
+            spans.forEach(span => span.style.display = 'none');
+            cells.forEach(cell => cell.setAttribute('contenteditable', true));
             document.querySelector('.save-button').style.display = 'block';
-
-            // Show the hidden fields
-            var hiddenFields = document.querySelectorAll('.hidden-field');
-            for (var i = 0; i < hiddenFields.length; i++) {
-                hiddenFields[i].style.display = 'block';
-            }
         }
-
-        // Function to save the edited data
         function saveData() {
-            var spans = document.querySelectorAll('span');
             var inputs = document.querySelectorAll('input[type="text"]');
+            var spans = document.querySelectorAll('span');
             var cells = document.querySelectorAll('#editableTable td');
- 
-            // Check if any fields have been edited
-            var edited = false;
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].value !== spans[i].innerText) {
-                    edited = true;
-                    break;
-                }
-            }
-
-            if (edited) {
-                // If any fields have been edited, save the edited data
-                for (var i = 0; i < inputs.length; i++) {
-                    var span = inputs[i].previousElementSibling;
-                    span.innerText = inputs[i].value;
-                    inputs[i].style.display = 'none';
-                    span.style.display = 'inline';
-                }
-
-                for (var i = 0; i < cells.length; i++) {
-                    cells[i].setAttribute('contenteditable', false);
-                }
-
-                // Hide the Save button after saving
-                document.querySelector('.save-button').style.display = 'none';
-
-                // Optionally, perform additional actions after saving edited data
-            } else {
-                // If no fields have been edited, simply save the extracted data
-                // Perform the save operation here (e.g., send data to server)
-                alert("Extracted data saved.");
-            }
+            inputs.forEach((input, index) => {
+                spans[index].innerText = input.value;
+                input.style.display = 'none';
+                spans[index].style.display = 'inline';
+            });
+            cells.forEach(cell => cell.setAttribute('contenteditable', false));
+            document.querySelector('.save-button').style.display = 'none';
         }
-
-        // Function to handle pushing JSON data to SAP
         function pushToSAP() {
-            // Perform the operation to push JSON to SAP here
-            // For demonstration purposes, let's assume the operation is successful
             alert("Your JSON file has been successfully pushed into SAP.");
         }
     </script>
