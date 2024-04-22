@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    
     <div class="container">
         <h1>Extracted Invoice Data</h1>
         {% for item in extracted_data %}
@@ -87,65 +86,102 @@
             cells.forEach(cell => cell.setAttribute('contenteditable', false));
             document.querySelector('.save-button').style.display = 'none';
 
-            updateJsonData(); // Update JSON data after saving
+            // Send edited data to the server
+            sendEditedData();
         }
 
-        function updateJsonData() {
-            var jsonData = {};
-            var rows = document.querySelectorAll('#editableTable tbody tr');
-            rows.forEach((row, index) => {
-                var rowData = {};
-                var cells = row.querySelectorAll('td');
-                cells.forEach((cell, cellIndex) => {
-                    var columnHeader = document.querySelector('#editableTable thead tr th:nth-child(' + (cellIndex + 1) + ')').innerText;
-                    rowData[columnHeader] = cell.innerText;
-                });
-                jsonData['Row ' + (index + 1)] = rowData;
+        function sendEditedData() {
+            var editedData = {};
+            var inputs = document.querySelectorAll('#editableTable input[type="text"]');
+            inputs.forEach(input => {
+                var fieldName = input.id.substring(5); // Remove 'edit_' prefix
+                editedData[fieldName] = input.value;
             });
-            console.log("Updated JSON Data:", jsonData);
+
+            fetch('/update_data/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify(editedData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Edited data sent successfully!");
+                } else {
+                    console.error("Failed to send edited data:", response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Error sending edited data:", error);
+            });
+        }
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
         }
 
         function pushToSAP() {
-            var jsonData = {};
-            var rows = document.querySelectorAll('#editableTable tbody tr');
-            rows.forEach((row, index) => {
-                var rowData = {};
-                var cells = row.querySelectorAll('td');
-                cells.forEach((cell, cellIndex) => {
-                    var columnHeader = document.querySelector('#editableTable thead tr th:nth-child(' + (cellIndex + 1) + ')').innerText;
-                    rowData[columnHeader] = cell.innerText;
-                });
-                jsonData['Row ' + (index + 1)] = rowData;
-            });
-            console.log("Pushing JSON data to SAP...");
-            console.log("JSON Data:", jsonData);
+    var jsonData = [];
+    var rows = document.querySelectorAll('#editableTable tbody tr');
 
-            // Construct the URL with the JSON data
-            var sap_url = "http://savic1909.savictech.com:8000/sap/bc/abap/zmigo_vk/rest/?sap-client=220&req=" + encodeURIComponent(JSON.stringify(jsonData));
+    rows.forEach((row, index) => {
+        var rowData = {};
+        var cells = row.querySelectorAll('td');
 
-            // Define your username and password
-            var username = "SAIP";
-            var password = "Praneeth@10";
+        cells.forEach((cell, cellIndex) => {
+            var columnHeaderElement = document.querySelector('#editableTable thead tr th:nth-child(' + (cellIndex + 1) + ')');
+            var columnHeader = columnHeaderElement ? columnHeaderElement.innerText : '';
+            rowData[columnHeader] = cell.innerText;
+        });
 
-            // Encode the credentials
-            var credentials = btoa(username + ':' + password);
+        jsonData.push(rowData);
+    });
 
-            // Make a GET request to push JSON data into SAP
-            fetch(sap_url, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Basic ' + credentials
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("JSON data retrieved successfully from SAP portal!");
-                console.log("Response:", data);
-            })
-            .catch(error => {
-                console.error("Failed to push JSON data to SAP portal:", error);
-            });
+    console.log("Pushing JSON data to SAP...");
+    console.log("JSON Data:", jsonData);
+
+    // Construct the URL with the JSON data
+    var sap_url = "http://savic1909.savictech.com:8000/sap/bc/abap/zmigo_vk/rest/?sap-client=220&req=" + encodeURIComponent(JSON.stringify(jsonData));
+
+    // Define your username and password
+    var username = "SAIP";
+    var password = "Praneeth@10";
+
+    // Encode the credentials
+    var credentials = btoa(username + ':' + password);
+
+    // Make a GET request to push JSON data into SAP
+    fetch(sap_url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Basic ' + credentials
         }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("JSON data retrieved successfully from SAP portal!");
+        console.log("Response:", data);
+        alert("JSON data pushed to SAP successfully!");
+    })
+    .catch(error => {
+        console.error("Failed to push JSON data to SAP portal:", error);
+        alert("Failed to push JSON data to SAP. Please try again!");
+    });
+}
+
     </script>
 </body>
 </html>

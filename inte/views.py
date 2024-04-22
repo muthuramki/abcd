@@ -73,49 +73,21 @@ def upload_invoice(request):
         # Analyze the layout and extract fields
         extracted_data = analyze_layout(file_content)
 
-        # Provided JSON data for each row
-        provided_data = {"ID": "1001", "BODY": []}
-
-        # Append each row of extracted data to the provided JSON
-        for document in extracted_data:
-            for row in document.get('Items', []):
-                item_row = {
-                    "VEN_NAME": document.get('VendorName', ''),
-                    "EBELN": document.get('Purchase Order Number', ''),
-                    "TXZ01": row.get('Description', ''),
-                    "MENGE_PO": row.get('Quantity', ''),
-                    "MENGE_GR": row.get('Quantity', ''),  # Assuming both fields are the same
-                }
-                provided_data['BODY'].append(item_row)
-
-        # Print the provided JSON data in the terminal
-        print(json.dumps(provided_data, indent=4))
-
-        # Convert the JSON data to a string
-        json_data = json.dumps(provided_data)
-
-        # Construct the URL with the JSON data
-        sap_url = f"http://savic1909.savictech.com:8000/sap/bc/abap/zmigo_vk/rest/?sap-client=220&req={json_data}"
-
-        # Define your username and password
-        username = "SAIP"
-        password = "Praneeth@10"
-
-        # Encode the credentials
-        credentials = base64.b64encode(f"{username}:{password}".encode()).decode()
-
-        # Make a GET request to push JSON data into SAP
-        response = requests.get(sap_url, headers={'Authorization': 'Basic ' + credentials})
-
-        # Check the response status code and handle accordingly
-        if response.status_code == 200:
-            print("JSON data retrieved successfully from SAP portal!")
-            print("Response:", json.dumps(response.json(), indent=4))
-        else:
-            print("Failed to push JSON data to SAP portal. Status code:", response.status_code)
-            print("Error message:", response.text)
-
         # Render a template with the extracted data
         return render(request, 'invoice_data.html', {'extracted_data': extracted_data})
 
     return render(request, 'upload.html')
+
+def update_data(request):
+    if request.method == 'POST':
+        # Get the edited data from the request body
+        edited_data = json.loads(request.body)
+        
+        # Print the updated JSON data to the terminal
+        print("Updated JSON data:", edited_data)
+        
+        # Respond with a success message
+        return JsonResponse({'message': 'Updated JSON data received successfully'}, status=200)
+    else:
+        # Respond with an error message if the request method is not POST
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
