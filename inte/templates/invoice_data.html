@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Invoice Data</title>
     <link rel="stylesheet" href="static/invoice_data.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -50,7 +50,7 @@
             {% endif %}
         {% endfor %}
     </div>
-    <div class="button-container">
+    <div class="button-container" style="text-align: center;">
         <button class="edit-button" onclick="toggleEdit()">Edit Data</button>
         <button class="save-button" onclick="saveData()" style="display: none;">Save</button>
         <button class="print-button" onclick="printInvoice()">Print Invoice</button>
