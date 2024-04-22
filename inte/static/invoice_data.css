@@ -110,37 +110,3 @@ p {
         top: 0;
     }
 }
-
-/* CSS for Desktop View */
- 
-/* Your existing CSS rules here */
- 
-/* CSS for Mobile View */
-@media only screen and (max-width: 600px) {
-    .container {
-        max-width: 95%; /* Adjusted width for smaller screens */
-    }
- 
-    .button-container {
-        flex-direction: column; /* Stack buttons vertically */
-        align-items: center; /* Center align buttons */
-    }
- 
-    table {
-        overflow-x: auto; /* Enable horizontal scrolling */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-    }
- 
-    .container {
-        padding: 10px; /* Reduced padding */
-    }
- 
-    th, td {
-        padding: 6px; /* Reduced padding */
-    }
- 
-    .edit-button, .print-button, .save-button, .sap-button {
-        padding: 8px 16px; /* Reduced button padding */
-        font-size: 14px; /* Reduced button font size */
-    }
-}
