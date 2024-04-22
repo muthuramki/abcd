@@ -20,7 +20,7 @@
                 <button type="button" class="clear-btn" onclick="clearFileInput()">Clear File</button>
             </div>
             <button type="submit" class="upload-btn">Upload Invoice</button>
-            <a href="#" class="instruction-link">Instructions For Uploading File</a>
+            <a href="#" class="instruction-link" onclick="showInstructions()">Instructions For Uploading Invoice</a>
         </form>
     </div>
 
@@ -28,6 +28,9 @@
         function clearFileInput() {
             var input = document.getElementById('invoice');
             input.value = ''; // Clear the input value
+        }
+        function showInstructions() {
+            alert("To upload an invoice, follow these steps:\n\n1. Click on the 'Choose File' button.\n\n2. Browse and select the PDF file of your invoice from your device.\n\n3. Click on the 'Upload' button to submit the invoice.\n\nNote: This uploader only accepts PDF files and is intended for invoice uploads only. Please make sure your file is in PDF format before uploading.");
         }
     </script>
 </body>
