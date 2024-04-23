@@ -22,13 +22,23 @@
             <button type="submit" class="upload-btn">Upload Invoice</button>
             <a href="#" class="instruction-link" onclick="showInstructions()">Instructions For Uploading Invoice</a>
         </form>
+
     </div>
+    <footer id="footer">
+        <span>
+            © 2024,
+            <a href="http://www.savictech.com" target="_blank">savic technologies pvt. ltd.</a>
+            All Rights Reserved.
+        </span>
+    </footer>
+    
 
     <script>
         function clearFileInput() {
             var input = document.getElementById('invoice');
             input.value = ''; // Clear the input value
         }
+
         function showInstructions() {
             alert("To upload an invoice, follow these steps:\n\n1. Click on the 'Choose File' button.\n\n2. Browse and select the PDF file of your invoice from your device.\n\n3. Click on the 'Upload' button to submit the invoice.\n\nNote: This uploader only accepts PDF files and is intended for invoice uploads only. Please make sure your file is in PDF format before uploading.");
         }

@@ -101,10 +101,26 @@ body {
     color: #007bff;
     text-decoration: none;
     font-size: 16px;
-    transition: color 0.3s;
+    transition: color 0.3s, text-decoration 0.3s; /* Combined transition properties */
+}
+.instruction-link:hover {
+    color: #0056b3;
 }
 
-.instruction-link:hover {
-    text-decoration: underline;
-    color: #0056b3;
+#footer{
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+    color: #727272;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 20px auto;
+    text-align: center;
+}
+#footer a {
+    text-decoration: none;
+    color: #727272;
+    font-size: 14px;
 }
