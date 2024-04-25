@@ -101,11 +101,14 @@ body {
     color: #007bff;
     text-decoration: none;
     font-size: 16px;
-    transition: color 0.3s, text-decoration 0.3s; /* Combined transition properties */
+    transition: color 0.3s;
+    border: none;
+    background-color: white;
 }
 .instruction-link:hover {
     color: #0056b3;
 }
+
 
 #footer{
     width: 100%;
