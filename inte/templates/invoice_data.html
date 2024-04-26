@@ -1,5 +1,3 @@
-[10:52] Gowthaman R.P
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +33,6 @@
                             <th>Tax</th>
                             <th>TaxRate</th>
                             <th>Amount</th>
-                            <th>MaterialNumber</th>
-                            <th>LineText</th>
-                            <th>LineItemNo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,9 +49,7 @@
                                 <td>{{ item_data.Tax }}</td>
                                 <td>{{ item_data.TaxRate }}</td>
                                 <td>{{ item_data.Amount }}</td>
-                                <td>{{ item_data.MaterialNumber }}</td>
-                                <td>{{ item_data.LineText }}</td>
-                                <td>{{ item_data.LineItemNo }}</td>
+                          
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -77,95 +70,69 @@
         <button class="print-button" onclick="printInvoice()">Print Invoice</button>
  
         <!-- push Button -->
-        <button class="sap-button" onclick="pushToSAP()">Push JSON to SAP</button>
+        <button class="sap-button" onclick="alert('Data pushed to SAP successfully!')">Push JSON to SAP</button>
     </div>
  
     <script>
         function printInvoice() {
             window.print();
-        };
+        }
  
-        // Function to toggle between display and edit mode
         function toggleEdit() {
-            var spans = document.querySelectorAll('span');
             var inputs = document.querySelectorAll('input[type="text"]');
+            var spans = document.querySelectorAll('span');
             var cells = document.querySelectorAll('#editableTable td');
- 
-            for (var i = 0; i < spans.length; i++) {
-                spans[i].style.display = 'none';
-                inputs[i].style.display = 'inline';
-                inputs[i].value = spans[i].innerText;
-            }
- 
-            for (var i = 0; i < cells.length; i++) {
-                cells[i].setAttribute('contenteditable', true);
-            }
- 
-            // Show the Save button
+            inputs.forEach((input, index) => {
+                input.style.display = 'inline';
+                input.value = spans[index].innerText;
+            });
+            spans.forEach(span => span.style.display = 'none');
+            cells.forEach(cell => cell.setAttribute('contenteditable', true));
             document.querySelector('.save-button').style.display = 'block';
- 
-            // Show the hidden fields
-            var hiddenFields = document.querySelectorAll('.hidden-field');
-            for (var i = 0; i < hiddenFields.length; i++) {
-                hiddenFields[i].style.display = 'block';
-            }
         }
  
-        // Function to save the edited data
         function saveData() {
-            var spans = document.querySelectorAll('span');
-            var inputs = document.querySelectorAll('input[type="text"]');
-            var cells = document.querySelectorAll('#editableTable td');
- 
-            // Check if any fields have been edited
-            var edited = false;
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].value !== spans[i].innerText) {
-                    edited = true;
-                    break;
-                }
-            }
- 
-            if (edited) {
-                // If any fields have been edited, save the edited data
-                for (var i = 0; i < inputs.length; i++) {
-                    var span = inputs[i].previousElementSibling;
-                    span.innerText = inputs[i].value;
-                    inputs[i].style.display = 'none';
-                    span.style.display = 'inline';
-                }
- 
-                // Set contenteditable to false for all table cells
-                for (var i = 0; i < cells.length; i++) {
-                    cells[i].setAttribute('contenteditable', false);
-                }
-               
-                // Toggle back to non-editable mode for non-table elements
-                var spans = document.querySelectorAll('span');
-                var inputs = document.querySelectorAll('input[type="text"]');
-                for (var i = 0; i < spans.length; i++) {
-                    spans[i].style.display = 'inline';
-                    inputs[i].style.display = 'none';
-                }
- 
-                // Hide the Save button after saving
-                document.querySelector('.save-button').style.display = 'none';
- 
-                // Toggle back to non-editable mode
-                toggleEdit();
-            } else {
-                // If no fields have been edited, simply save the extracted data
-                // Perform the save operation here (e.g., send data to server)
-                alert("Extracted data saved.");
-            }
-        }
- 
-        // Function to handle pushing JSON data to SAP
-        function pushToSAP() {
-            // Perform the operation to push JSON to SAP here
-            // For demonstration purposes, let's assume the operation is successful
-            alert("Your JSON file has been successfully pushed into SAP.");
-        }
+    var inputs = document.querySelectorAll('input[type="text"]');
+    var spans = document.querySelectorAll('span');
+    var cells = document.querySelectorAll('#editableTable td');
+    inputs.forEach((input, index) => {
+        spans[index].innerText = input.value;
+        input.style.display = 'none';
+        spans[index].style.display = 'inline';
+    });
+    cells.forEach(cell => cell.setAttribute('contenteditable', false));
+    document.querySelector('.save-button').style.display = 'none';
+
+    // Create the alert message element
+    var alertMessage = document.createElement('div');
+    alertMessage.classList.add('alert');
+    alertMessage.textContent = "Your changes have been saved successfully!";
+    // Append the alert message to the body
+    document.body.appendChild(alertMessage);
+    
+    // Remove the alert message after 3 seconds (3000 milliseconds)
+    setTimeout(function() {
+        alertMessage.remove();
+    }, 3000);
+}
+
+function pushToSAP() {
+    // Perform the operation to push JSON to SAP here
+    // For demonstration purposes, let's assume the operation is successful
+    
+    // Create the alert message element
+    var alertMessage = document.createElement('div');
+    alertMessage.classList.add('alert');
+    alertMessage.textContent = "Your JSON file has been successfully pushed into SAP.";
+    // Append the alert message to the body
+    document.body.appendChild(alertMessage);
+    
+    // Remove the alert message after 3 seconds (3000 milliseconds)
+    setTimeout(function() {
+        alertMessage.remove();
+    }, 3000);
+}
+
     </script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+
+.alert {
+    position: fixed;
+    top: 20px; /* Adjust top position as needed */
+    right: 20px; /* Adjust right position as needed */
+    background-color: #f8d7da; /* Reddish background color */
+    color: #721c24; /* Dark text color */
+    padding: 10px;
+    border: 1px solid #f5c6cb; /* Light border color */
+    border-radius: 5px;
+    width: 300px; /* Adjust width as needed */
+    text-align: center;
+}
+
