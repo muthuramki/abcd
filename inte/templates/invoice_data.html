@@ -5,21 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Data</title>
     <link rel="stylesheet" href="static/invoice_data.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Extracted Invoice Data</h1>
- 
-        <!-- Iterate over each item in extracted_data -->
         {% for item in extracted_data %}
-            <!-- Display non-item fields -->
             {% for key, value in item.items %}
                 {% if key != 'Items' %}
                     <p>{{ key }}: <span id="{{ key }}">{{ value }}</span> <input type="text" id="edit_{{ key }}" style="display: none;"></p>
                 {% endif %}
             {% endfor %}
- 
-            <!-- Display item fields -->
             {% if item.Items %}
                 <table id="editableTable">
                     <thead>
@@ -36,10 +32,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Iterate over each item in Items -->
                         {% for item_data in item.Items %}
                             <tr>
-                                <!-- Display values for each item field -->
                                 <td>{{ item_data.ProductCode }}</td>
                                 <td>{{ item_data.Barcode }}</td>
                                 <td>{{ item_data.Description }}</td>
@@ -49,7 +43,6 @@
                                 <td>{{ item_data.Tax }}</td>
                                 <td>{{ item_data.TaxRate }}</td>
                                 <td>{{ item_data.Amount }}</td>
-                          
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -57,83 +50,123 @@
             {% endif %}
         {% endfor %}
     </div>
- 
-    <!-- Buttons -->
     <div class="button-container">
-        <!-- Edit Button -->
         <button class="edit-button" onclick="toggleEdit()">Edit Data</button>
-               
-        <!-- Save Button -->
         <button class="save-button" onclick="saveData()" style="display: none;">Save</button>
- 
-        <!-- Print Button -->
         <button class="print-button" onclick="printInvoice()">Print Invoice</button>
- 
-        <!-- push Button -->
-        <button class="sap-button" onclick="alert('Data pushed to SAP successfully!')">Push JSON to SAP</button>
+        <button class="sap-button" onclick="pushToSAP()">Push JSON to SAP</button>
     </div>
- 
     <script>
         function printInvoice() {
             window.print();
         }
- 
+
         function toggleEdit() {
-            var inputs = document.querySelectorAll('input[type="text"]');
-            var spans = document.querySelectorAll('span');
-            var cells = document.querySelectorAll('#editableTable td');
-            inputs.forEach((input, index) => {
-                input.style.display = 'inline';
-                input.value = spans[index].innerText;
+            $('input[type="text"]').each(function() {
+                $(this).show().val($(this).prev('span').text());
             });
-            spans.forEach(span => span.style.display = 'none');
-            cells.forEach(cell => cell.setAttribute('contenteditable', true));
-            document.querySelector('.save-button').style.display = 'block';
+            $('span').hide();
+            $('#editableTable td').attr('contenteditable', true);
+            $('.save-button').show();
         }
- 
+
         function saveData() {
-    var inputs = document.querySelectorAll('input[type="text"]');
-    var spans = document.querySelectorAll('span');
-    var cells = document.querySelectorAll('#editableTable td');
-    inputs.forEach((input, index) => {
-        spans[index].innerText = input.value;
-        input.style.display = 'none';
-        spans[index].style.display = 'inline';
-    });
-    cells.forEach(cell => cell.setAttribute('contenteditable', false));
-    document.querySelector('.save-button').style.display = 'none';
+            $('input[type="text"]').each(function() {
+                $(this).prev('span').text($(this).val());
+                $(this).hide();
+            });
+            $('span').show();
+            $('#editableTable td').attr('contenteditable', false);
+            $('.save-button').hide();
+        }
 
-    // Create the alert message element
-    var alertMessage = document.createElement('div');
-    alertMessage.classList.add('alert');
-    alertMessage.textContent = "Your changes have been saved successfully!";
-    // Append the alert message to the body
-    document.body.appendChild(alertMessage);
-    
-    // Remove the alert message after 3 seconds (3000 milliseconds)
-    setTimeout(function() {
-        alertMessage.remove();
-    }, 3000);
-}
+        function pushToSAP() {
+            // Initialize the provided data object
+            let providedData = {
+                "ID": "1001",
+                "BODY": []
+            };
 
-function pushToSAP() {
-    // Perform the operation to push JSON to SAP here
-    // For demonstration purposes, let's assume the operation is successful
-    
-    // Create the alert message element
-    var alertMessage = document.createElement('div');
-    alertMessage.classList.add('alert');
-    alertMessage.textContent = "Your JSON file has been successfully pushed into SAP.";
-    // Append the alert message to the body
-    document.body.appendChild(alertMessage);
-    
-    // Remove the alert message after 3 seconds (3000 milliseconds)
-    setTimeout(function() {
-        alertMessage.remove();
-    }, 3000);
-}
+            // Extract non-item fields
+            let nonItemFields = document.querySelectorAll('.container p');
+            let nonItemFieldsData = {};
+            nonItemFields.forEach(function(field) {
+                let key = field.querySelector('span').getAttribute('id');
+                let value = field.querySelector('span').innerText;
+                nonItemFieldsData[key] = value;
+            });
 
+            // Extract table data
+            let tableRows = document.querySelectorAll('#editableTable tbody tr');
+            tableRows.forEach(function(row) {
+                let rowData = {};
+                let rowCells = row.querySelectorAll('td');
+                rowCells.forEach(function(cell, index) {
+                    let header = document.querySelector('#editableTable thead th:nth-child(' + (index + 1) + ')').innerText;
+                    rowData[header] = cell.innerText;
+                });
+                providedData["BODY"].push(rowData);
+            });
+
+            // Mapping data to desired format
+            let transformedData = {
+                "ID": providedData["ID"],
+                "BODY": providedData["BODY"].map(function(item) {
+                    return {
+                        "VEN_NAME": nonItemFieldsData["VendorName"],
+                        "EBELN": nonItemFieldsData["Purchase Order Number"],
+                        "TXZ01": item["Description"],
+                        "MENGE_PO": item["Quantity"],
+                        "MENGE_GR": item["Quantity"] // Assuming this is the quantity received
+                    };
+                })
+            };
+
+            // Convert the JSON data to a string
+            let jsonData = JSON.stringify(transformedData);
+            console.log("transformed Data:");
+            console.log(JSON.stringify(transformedData, null, 4));
+
+            // Send an AJAX request to Django endpoint
+            $.ajax({
+                type: "POST",
+                url: "/push-to-sap/",
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                },
+                data: jsonData,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+                    console.log("Data pushed to SAP successfully!");
+                    console.log("Response:", response);
+                    // Print response to response.html
+                    $('#response').html(JSON.stringify(response));
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error:", error);
+                    // Print error message to response.html
+                    $('#response').html("Error: " + error);
+                }
+            });
+        }
+
+        // Function to get CSRF token from cookie
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
     </script>
 </body>
 </html>
- 

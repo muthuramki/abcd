@@ -6,17 +6,16 @@
     <title>Upload Invoice</title>
     <link rel="stylesheet" href="static/upload.css">
     <link rel="stylesheet" href="static/page_load.css"> 
-    <link rel="icon" href="static/ocr.png" type="image/x-icon">
+    <link rel="icon" href="static/images/ocr.png" type="image/x-icon">
 </head>
 <body>
 
 <!-- Loading overlay -->
 <div id="processing" style="display: none;"></div>
-
 <div class="container">
     <form id="uploadForm" method="post" enctype="multipart/form-data" class="upload-form" onsubmit="startLoading()">
         {% csrf_token %}
-        <img src="static/savic.png" alt="image" class="logo">
+        <img src="../static/images/savic.png" alt="image" class="logo">
         <h2 class="title">OCR PROJECT</h2>
         <div class="form-group">
             <label for="invoice" class="file-label">Choose PDF Invoice:</label>
@@ -26,6 +25,9 @@
         <button type="button" class="upload-btn"  onclick="uploadInvoice()">Upload Invoice</button> <!-- Change type to button -->
         <a href="#" class="instruction-link" onclick="showInstructions()">Instructions For Uploading Invoice</a>
     </form>
+</div>
+<div class="rightside_box">
+
 </div>
 
 <footer id="footer">

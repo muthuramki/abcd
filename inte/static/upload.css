@@ -4,7 +4,7 @@ body {
     padding: 0;
     /* background: rgb(2,0,36); */
     /* background: radial-gradient(circle, rgb(10, 4, 119) 0%, rgb(44, 44, 189) 37%, rgba(0,212,255,1) 100%); */
-    background-image: url("bg.svg");
+    background-image: url("images/bg.svg");
     /* Specify background size, repeat, and position if needed */
     background-size: cover; /* Cover the entire background */
     background-repeat: no-repeat; /* Do not repeat the background image */
@@ -126,4 +126,15 @@ body {
     text-decoration: none;
     color: #727272;
     font-size: 14px;
+}
+
+.rightside_box {
+    width: 390px;
+    height: auto;
+    float: right;
+    box-sizing: border-box;
+    padding: 40px;
+    background-color: #fff;
+    display: table-cell;
+    overflow: hidden;
 }
