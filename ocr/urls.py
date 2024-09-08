@@ -21,5 +21,6 @@ from inte.views import resume_view
 
 urlpatterns = [
     path('', resume_view, name='ramki'),
+
    
 ]
