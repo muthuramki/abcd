@@ -60,8 +60,12 @@ WSGI_APPLICATION = 'ocr.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ocr',
+        'USER': 'root',
+        'PASSWORD': 'Sivaraman30598@',
+        'HOST': 'localhost',  # Or your MySQL server hostname
+        'PORT': '3306',  # Or your MySQL server port
     }
 }
 
@@ -111,3 +115,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

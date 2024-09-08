@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramki - Full Stack Developer</title>
+    <link rel="stylesheet" href="static/ramki.css">
+    <link rel="logo" href="static/Screenshot.jpg">
+    <script src="https://kit.fontawesome.com/0bcebb2172.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <header class="header">
+        <a class="logo"><img src="static/Screenshot.jpg" alt="Logo"></a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#Service">Service</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="home" id="home">
+        <div class="header-text">
+            <p class="role">Python Developer <span class="divider">||</span> Full Stack Developer</p>
+            <h1>Hi, I'm <span>Ramki</span> From Sankarankovil, <br>Tenkasi District.</h1>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" >
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="static/pic.jpeg" alt="Profile Picture">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>
+                        I am currently working at <strong>SAVIC Technologies</strong> with around one year of experience, including an internship. During my tenure, I have developed and deployed <strong>OCR (Optical Character Recognition) solutions</strong> for both computer-printed and handwritten invoices.
+                    </p>
+
+                    <p>
+                        As a <strong>Python Developer</strong>, I have a strong command over Python and its libraries, which I use extensively for data analysis, web development, and automation tasks. In addition to Python, I have developed full stack applications using modern frameworks such as <strong>Django</strong> and <strong>HTML, CSS, JavaScript</strong>, providing me with a comprehensive understanding of both front-end and back-end development.
+                    </p>
+                    <p>
+                        My passion for technology drives me to continually learn and explore new advancements in the field. I am committed to developing efficient, scalable, and user-friendly solutions. In my free time, I enjoy contributing to open-source projects and staying up-to-date with the latest trends in the tech industry.
+                    </p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" data-tab="skills">Skills</p>
+                        <p class="tab-links" data-tab="experience">Experience</p>
+                        <p class="tab-links" data-tab="education">Education</p>
+                    </div>
+                    <div class="tab-contents">
+                        <div id="skills" class="tab-content active-tab">
+                            <ul>
+                                <li>Python</li>
+                                <li>Django</li>
+                                <li>JavaScript</li>
+                                <li>HTML/CSS</li>
+                                <li>My SQL</li>
+                                <li>Power BI</li>
+                                <li>Git</li>
+                                <li>Azure DevOps</li>
+                                <li>Machine Learning</li>
+                            </ul>
+                        </div>
+                        <div id="experience" class="tab-content">
+                            <h3>SAVIC Technologies</h3>
+                            <p>Sep 2023 to present</p>
+                            <p>Developed and deployed OCR solutions for invoice extraction.</p>
+                        </div>
+                        <div id="education" class="tab-content">
+                            <h3>Dr. Sivanthi Aditanar College of Engineering</h3>
+                            <p>Bachelor of Engineering in Mechanical Engineering</p>
+                            <p>2015 - 2019</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section id="Service" class="animate-in">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Web Design</h2>
+                    <p>I create visually appealing and user-friendly website designs that enhance the user experience.</p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa fa-crop-alt"></i>
+                    <h2>Web Development</h2>
+                    <p>I develop robust and scalable web applications using the latest technologies and best practices.</p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa fa-app-store"></i>
+                    <h2>Power BI</h2>
+                    <p>I provide data visualization and business intelligence solutions using Power BI to help you make informed decisions.</p>
+                    <a href="#">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="animate-in">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="static/work-1.png" alt="Work 1">
+                
+                <div class="layer">
+                    <h3>OCR Extraction</h3>
+                    <p>OCR extraction converts images or scanned documents into editable text for computer analysis and manipulation.</p>
+                    <a class="toggle-link" onclick="toggleModal()"><i class="fa fa-external-link-alt"></i></a>
+                    <a href="https://savicocr.azurewebsites.net/"><button class="link">Link</button></a>
+                </div>
+                <div id="myModal1" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                    <p class="para">
+                    My OCR solutions are designed to extract data from invoices accurately, making the data <strong class="highlight">editable</strong> post-extraction. Additionally, these solutions support <strong class="highlight">printing</strong> the extracted data and <strong class="highlight">pushing it into SAP in JSON format</strong>, streamlining the data integration process.
+                    </p>
+                    <p class="para">
+                        This service allows you to upload multiple invoices or even a folder of invoices at a time. Users can select the type of service they need, such as <strong class="highlight">computer-generated invoices</strong> or <strong class="highlight">handwritten invoices</strong>. The process involves user registration, where personal details and the type of service are provided. After registration, users receive a unique <strong class="highlight">user ID and password</strong> to access and enjoy our services.
+                    </p>
+                    <p class="para">
+                        The system features a <strong class="highlight">dashboard</strong> that displays the status of invoices, including how many are still being processed and how many have been pushed to SAP. The dashboard also shows detailed information such as the total amount, invoice number, PO number, and total tax amount for each invoice.
+                    </p>
+                </span>
+                </div> 
+            </div>
+
+            </div>
+      
+                
+            <div class="work">
+                <img src="static/7DP4CP6D_output_0.jpeg" alt="Work 2">
+                <div class="layer">
+                    <h3>Sales Prediction Dashboard</h3>
+                    <p>
+                        A sales prediction dashboard provides real-time insights and forecasts on future sales performance based on historical data and analytics.
+                    </p>
+                    <a class="toggle-link" onclick="toggleModal2()"><i class="fa fa-external-link-alt"></i></a>
+                    <a href="https://app.powerbi.com/groups/me/reports/ceea7042-a013-4842-9041-88b5c11a1d3d/ReportSection?ctid=8a50a18b-c135-4d02-b21a-bd6b114c6755&experience=power-bi"><button class="link">Link</button></a>
+                    </div>
+                    <div id="myModal2" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal2()">&times;</span>
+                            <p class="para"> 
+                                The <strong class="highlight">sales prediction dashboard</strong> provides valuable insights into future sales performance by leveraging various algorithms such as <strong class="highlight">decision trees</strong>, <strong class="highlight">linear regression</strong>, and <strong class="highlight">random forest</strong>. By analyzing historical sales data, these algorithms forecast sales trends and patterns, enabling businesses to make informed decisions and strategies.
+                            </p>
+                            <p class="para">
+                                One of the key features of this dashboard is its ability to <strong class="highlight">compare predicted sales figures with the average sales</strong> from previous months, typically January to November. This comparison helps in evaluating the accuracy of the predictions and identifying any discrepancies or anomalies in sales performance.
+                            </p>
+                            <p class="para">
+                                Additionally, the dashboard offers <strong class="highlight">interactive visualizations</strong> and <strong class="highlight">reports</strong> that allow users to drill down into specific regions, products, or time periods to gain deeper insights. Users can customize the dashboard according to their preferences and business needs, making it a versatile tool for sales analysis and forecasting.
+                            </p>
+                            <p class="para">
+                                With its user-friendly interface and powerful analytics capabilities, the <strong class="highlight">sales prediction dashboard</strong> empowers businesses to optimize their sales strategies, identify growth opportunities, and stay ahead of the competition in today's dynamic marketplace.
+                            </p>
+                            
+                    </span>
+                    </div> 
+                </div>
+    
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<!-- <section id="contact">
+    <div class="container">
+        <div class="row">
+            <h1 class="sub-title">Contact Me</h1>
+           <div class="contact-left">
+                <p><i class="fa fa-paper-plane"></i> muthuramki30598@gmail.com</p>
+                <p><i class="fa fa-phone-square-alt"></i>9345319189</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/m-ramki-0aa85b167" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="Ramki_Python.pdf" class="btn2">Download CV</a>
+                </div>
+            </div>
+            <div class="contact-right">
+                <form action="/submit_contact_form" method="post">
+                    <div class="input-box">
+                        <input id="name" name="name" type="text" placeholder="Full Name" required>
+                        <input type="email" name="email" id="name" placeholder="Email Address" required>
+        
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="mobile" name="number" placeholder="Mobile Number" required>
+                        <input type="text" id="subject" name="subject" placeholder="Email Subject" required>
+                    </div>
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                    <input type="submit" value="Send Message" class="btn">
+                </form>
+            </div>
+        </div>
+    </div>
+</section> -->
+<section class="contact" id="contact">
+    <h2 class="heading">Contact <span> Me</span></h2>
+    <form action="#" id="contact-form">
+        <div class="input-box">
+            <input id="name" name="name" type="text" placeholder="Full Name" required>
+            <input type="email" name="email" id="name" placeholder="Email Address" required>
+
+        </div>
+        <div class="input-box">
+            <input type="text" id="mobile" name="number" placeholder="Mobile Number" required>
+            <input type="text" id="subject" name="subject" placeholder="Email Subject" required>
+        </div>
+        <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+        <input type="submit" value="Send Message" class="btn">
+    </form>
+
+</section>
+<!-- footer -->
+<footer class="footer">
+    <p><i class="fa fa-paper-plane"></i> muthuramki30598@gmail.com</p>
+    <p><i class="fa fa-phone-square-alt"></i>9345319189</p>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter-square"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/m-ramki-0aa85b167" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="Ramki_Python.pdf" class="btn2" download>Download CV</a>
+
+    </div>
+    <div class="footer-text">
+    </div>
+    <div class="footer-iconTop">
+        <a href="#home"><i class="fa-solid fa-angles-up"></i></a>
+    </div>
+</footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabLinks = document.querySelectorAll('.tab-links');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const tabId = link.dataset.tab;
+                    tabLinks.forEach(item => item.classList.remove('active-link'));
+                    tabContents.forEach(item => item.classList.remove('active-tab'));
+                    link.classList.add('active-link');
+                    document.getElementById(tabId).classList.add('active-tab');
+                });
+            });
+        });
+
+        function toggleModal() {
+            var modal = document.getElementById('myModal1');
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal1');
+            modal.style.display = 'none';
+        }
+
+        function toggleModal2() {
+            var modal = document.getElementById('myModal2');
+            modal.style.display = 'block';
+        }
+
+        function closeModal2() {
+            var modal = document.getElementById('myModal2');
+            modal.style.display = 'none';
+        }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.animate-in');
+    
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+    
+        function animateOnScroll() {
+            animateElements.forEach(function(el) {
+                if (isElementInViewport(el)) {
+                    el.classList.add('active');
+                }
+            });
+        }
+    
+        animateOnScroll();
+    
+        window.addEventListener('scroll', animateOnScroll);
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        const aboutCol1 = document.querySelector('.about-col-1');
+        const aboutCol2 = document.querySelector('.about-col-2');
+
+        function onScroll() {
+            const windowHeight = window.innerHeight;
+            const aboutCol1Top = aboutCol1.getBoundingClientRect().top;
+            const aboutCol2Top = aboutCol2.getBoundingClientRect().top;
+
+            if (aboutCol1Top < windowHeight) {
+                aboutCol1.classList.add('visible');
+            }
+
+            if (aboutCol2Top < windowHeight) {
+                aboutCol2.classList.add('visible');
+            }
+        }
+
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // Trigger on load
+    });
+</script>
+</body>
+</html>
