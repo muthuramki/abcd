@@ -10,7 +10,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-oj-8uv8g=23^+orpuv-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ramkifullstackdeveloper-gah4emd3byhkf3fk.southindia-01.azurewebsites.net', '127.0.0.1']
+ALLOWED_HOSTS = ['ramkiportfolio-bcc3g4duenhjf3cd.southeastasia-01.azurewebsites.net', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
